@@ -4,13 +4,11 @@ import org.example.android.pages.HomePage;
 import org.example.android.pages.SelectLessonPage;
 import org.example.android.pages.TrainingSessionPage;
 import org.testng.annotations.Test;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import static org.testng.Assert.assertEquals;
 
 public class InitAndroidTests extends BaseTest {
     @Test
-    public void test() throws MalformedURLException, URISyntaxException {
+    public void test()  {
         HomePage homepage = new HomePage();
         homepage.tabOnKochTraining();
 

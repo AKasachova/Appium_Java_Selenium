@@ -14,7 +14,7 @@ public class TrainingSessionPage extends BaseForm {
         super(By.xpath("//android.widget.TextView[@text=\"Training Session\"]"), "Training Session Page");
     }
 
-    public void waitUntilTrainingSessionPageIsLoaded() throws MalformedURLException, URISyntaxException {
+    public void waitUntilTrainingSessionPageIsLoaded(){
         waitUntilPageIsDisplayed(5);
     }
 

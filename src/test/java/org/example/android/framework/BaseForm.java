@@ -17,8 +17,15 @@ public abstract class BaseForm {
         this.name = name;
     }
 
-    public void waitUntilPageIsDisplayed(int timeoutInSeconds) throws MalformedURLException, URISyntaxException {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeoutInSeconds));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    public void waitUntilPageIsDisplayed(int timeoutInSeconds) {
+        WebDriverWait wait = null;
+        try {
+            wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeoutInSeconds));
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 }

@@ -26,7 +26,8 @@ public class Driver {
         if (driver == null) {
             UiAutomator2Options options = new UiAutomator2Options()
                     .setUdid(config.getProperty("emulator.udid"))
-                    .setApp(config.getProperty("app.path").replace("${user.dir}", System.getProperty("user.dir")));
+                    .setApp(config.getProperty("app.path").replace("${user.dir}",
+                            System.getProperty("user.dir")));
             driver = new AndroidDriver(
                     new URI(config.getProperty("appium.server.url")).toURL(), options
             );
