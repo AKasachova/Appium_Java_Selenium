@@ -1,12 +1,7 @@
 package org.example.android.framework;
 
-import org.example.android.framework.driver.Driver;
+import org.example.android.framework.driver.DriverWaiters;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.time.Duration;
 
 public abstract class BaseForm {
     protected By by;
@@ -17,8 +12,7 @@ public abstract class BaseForm {
         this.name = name;
     }
 
-    public void waitUntilPageIsDisplayed(int timeoutInSeconds) throws MalformedURLException, URISyntaxException {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeoutInSeconds));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    public void waitUntilPageIsDisplayed(int timeoutInSeconds) {
+        DriverWaiters.getWebDriverWait(by, timeoutInSeconds);
     }
 }

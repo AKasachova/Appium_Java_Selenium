@@ -1,12 +1,8 @@
 package org.example.android.framework.elements;
 
 import org.example.android.framework.driver.Driver;
+import org.example.android.framework.driver.DriverWaiters;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 
@@ -19,11 +15,15 @@ public abstract class BaseElement {
         this.name = name;
     }
 
-    protected WebElement getElement() throws MalformedURLException, URISyntaxException {
+    protected WebElement getElement() {
         return Driver.getDriver().findElement(by);
     }
 
-    protected List<WebElement> getElements() throws MalformedURLException, URISyntaxException {
+    protected void waitForVisibility(int timeoutInSeconds) {
+        DriverWaiters.getWebDriverWait(by, timeoutInSeconds);
+    }
+
+    protected List<WebElement> getElements() {
         List<WebElement> webElementList = Driver.getDriver().findElements(by);
         if (webElementList.isEmpty()) {
             return null;
@@ -33,14 +33,14 @@ public abstract class BaseElement {
     }
 
     public void tapOnElement() {
-        try {
             getElement().click();
-        } catch (ElementClickInterceptedException|MalformedURLException|URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
     }
 
-    public String getText() throws MalformedURLException, URISyntaxException {
+    public String getText() {
         return getElement().getText();
+    }
+
+    public boolean isElementDisplayed() {
+        return getElement().isDisplayed();
     }
 }

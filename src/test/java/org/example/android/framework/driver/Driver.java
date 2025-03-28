@@ -22,14 +22,19 @@ public class Driver {
         }
     }
 
-    public static AndroidDriver getDriver() throws URISyntaxException, MalformedURLException {
+    public static AndroidDriver getDriver() {
         if (driver == null) {
             UiAutomator2Options options = new UiAutomator2Options()
                     .setUdid(config.getProperty("emulator.udid"))
-                    .setApp(config.getProperty("app.path").replace("${user.dir}", System.getProperty("user.dir")));
-            driver = new AndroidDriver(
-                    new URI(config.getProperty("appium.server.url")).toURL(), options
-            );
+                    .setApp(config.getProperty("app.path").replace("${user.dir}",
+                            System.getProperty("user.dir")));
+            try {
+                driver = new AndroidDriver(
+                        new URI(config.getProperty("appium.server.url")).toURL(), options
+                );
+            } catch (MalformedURLException | URISyntaxException e) {
+                throw new RuntimeException("Failed to initialize AndroidDriver. Please check the Appium server URL in config.properties.", e);
+            }
             return driver;
         }
         return driver;
